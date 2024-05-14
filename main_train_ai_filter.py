@@ -30,10 +30,7 @@ def predict_model(content: str, mark: int) -> None:
 async def resend_message(message: types.Message):
     if int(message.chat.id) == accepted_chai_id:
         return
-    if message.text and message.text.lower().__contains__('новое в dzen'):
-        return
-    if message.caption and message.caption.lower().__contains__('новое в dzen'):
-        return
+
     builder = InlineKeyboardBuilder()
     builder.row(
         types.InlineKeyboardButton(text='Подходит', callback_data='yes'),
@@ -48,6 +45,11 @@ async def resend_message(message: types.Message):
         )
     except:
         print('Error')
+
+    if message.caption and message.caption.lower().__contains__('новое в dzen'):
+        return
+    if message.text and message.text.lower().__contains__('новое в dzen'):
+        return
 
     if message.text and message.text.__contains__('Оценка важности:'):
         mark = float(message.text.split('Оценка важности:')[1].strip())
