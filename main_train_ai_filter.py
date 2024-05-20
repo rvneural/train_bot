@@ -10,7 +10,7 @@ token = '6709012144:AAFHow1-1wJUXtgZv6taEn0ykFTcFMn9jSU'
 dp = Dispatcher()
 bot = Bot(token=token)
 r = Router()
-chat_id = -1002000518192 #Канал RSS
+chat_id = -100421349553 #Канал RSS
 accepted_chai_id = -1002023007325
 user_id = 421349553
 
