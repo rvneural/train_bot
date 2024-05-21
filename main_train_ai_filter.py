@@ -11,7 +11,7 @@ dp = Dispatcher()
 bot = Bot(token=token)
 r = Router()
 chat_id = 421349553 #Канал RSS
-accepted_chai_id = 2023007325
+accepted_chai_id = -1002023007325
 user_id = 421349553
 
 split_mark = 0.65
