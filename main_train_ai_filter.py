@@ -16,7 +16,7 @@ chat_id = -4162163377 #Канал RSS
 accepted_chai_id = -1002023007325
 user_id = 421349553
 
-split_mark = 0.65
+split_mark = 0.576
 
 
 def predict_model(content: str, mark: int) -> None:
