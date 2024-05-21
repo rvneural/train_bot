@@ -1,4 +1,6 @@
 import os
+
+import pandas
 from aiogram import Bot, Dispatcher, Router, types
 import asyncio
 from aiogram.utils.keyboard import InlineKeyboardBuilder
@@ -10,7 +12,7 @@ token = '6709012144:AAFHow1-1wJUXtgZv6taEn0ykFTcFMn9jSU'
 dp = Dispatcher()
 bot = Bot(token=token)
 r = Router()
-chat_id = 421349553 #Канал RSS
+chat_id = -4162163377 #Канал RSS
 accepted_chai_id = -1002023007325
 user_id = 421349553
 
@@ -46,32 +48,14 @@ async def resend_message(message: types.Message):
     except:
         print('Error')
 
-    if message.caption and message.caption.lower().__contains__('новое в dzen'):
-        return
-    if message.text and message.text.lower().__contains__('новое в dzen'):
-        return
-
-    if message.text and message.text.__contains__('Оценка важности:'):
-        mark = float(message.text.split('Оценка важности:')[1].strip())
-        if mark > split_mark:
-            await bot.forward_message(
-                chat_id=accepted_chai_id,
-                from_chat_id=message.chat.id,
-                message_id=message.message_id
-            )
-    if message.caption and message.caption.__contains__('Оценка важности:'):
-        mark = float(message.caption.split('Оценка важности:')[1].strip())
-        if mark > split_mark:
-            await bot.forward_message(
-                chat_id=accepted_chai_id,
-                from_chat_id=message.chat.id,
-                message_id=message.message_id
-            )
-
 
 @r.callback_query()
 async def add_to_csv(callback: types.CallbackQuery):
     message = callback.message
+    content = pandas.read_csv('train.csv')
+    marks = content['Type']
+    print(marks.value_counts())
+
     if callback.data != 'yes' and callback.data != 'no':
         print('Exit 2')
         return
@@ -125,10 +109,10 @@ async def add_to_csv(callback: types.CallbackQuery):
             reply_markup=builder.as_markup()
         )
 
-    try:
-        predict_model(text, mark)
-    except:
-        return
+    data = [[text, mark]]
+    dataframe = pandas.DataFrame(data)
+    dataframe.to_csv('train.csv', header=False, index=False, mode='a')
+
 
 
 async def start() -> None:
