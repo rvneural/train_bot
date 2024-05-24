@@ -4,7 +4,6 @@ import pandas
 from aiogram import Bot, Dispatcher, Router, types
 import asyncio
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-import sys
 import io
 import socket
 
@@ -31,9 +30,6 @@ def predict_model(content: str, mark: int) -> None:
 
 @r.channel_post()
 async def resend_message(message: types.Message):
-
-    print(message)
-
     if int(message.chat.id) == accepted_chai_id:
         return
 
