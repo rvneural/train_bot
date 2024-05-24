@@ -7,12 +7,12 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 import sys
 import io
 import socket
-token = '6709012144:AAFHow1-1wJUXtgZv6taEn0ykFTcFMn9jSU'
+token = '6497454091:AAGC6rkSP45cS91J_pr9tJYjotcnGCzRDpA'
 
 dp = Dispatcher()
 bot = Bot(token=token)
 r = Router()
-chat_id = -4162163377 #Канал RSS
+chat_id = -1002186252027 #Канал RSS
 accepted_chai_id = -1002023007325
 user_id = 421349553
 
@@ -112,7 +112,6 @@ async def add_to_csv(callback: types.CallbackQuery):
     data = [[text, mark]]
     dataframe = pandas.DataFrame(data)
     dataframe.to_csv('train.csv', header=False, index=False, mode='a')
-
 
 
 async def start() -> None:
