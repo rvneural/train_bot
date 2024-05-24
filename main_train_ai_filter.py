@@ -31,10 +31,11 @@ def predict_model(content: str, mark: int) -> None:
 
 @r.channel_post()
 async def resend_message(message: types.Message):
-    if int(message.chat.id) == accepted_chai_id:
-        return
 
     print(message)
+
+    if int(message.chat.id) == accepted_chai_id:
+        return
 
     builder = InlineKeyboardBuilder()
     builder.row(
@@ -124,5 +125,4 @@ async def start() -> None:
 
 
 if __name__ == '__main__':
-
     asyncio.run(start())
