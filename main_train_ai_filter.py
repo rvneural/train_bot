@@ -52,9 +52,6 @@ async def resend_message(message: types.Message):
 @r.callback_query()
 async def add_to_csv(callback: types.CallbackQuery):
     message = callback.message
-    content = pandas.read_csv('train.csv')
-    marks = content['Type']
-    print(marks.value_counts())
 
     if callback.data != 'yes' and callback.data != 'no':
         print('Exit 2')
