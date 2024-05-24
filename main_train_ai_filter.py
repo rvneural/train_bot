@@ -7,12 +7,13 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 import sys
 import io
 import socket
+
 token = '6497454091:AAGC6rkSP45cS91J_pr9tJYjotcnGCzRDpA'
 
 dp = Dispatcher()
 bot = Bot(token=token)
 r = Router()
-chat_id = -1002186252027 #Канал RSS
+chat_id = -1002186252027  #Канал RSS
 accepted_chai_id = -1002023007325
 user_id = 421349553
 
@@ -20,7 +21,7 @@ split_mark = 0.576
 
 
 def predict_model(content: str, mark: int) -> None:
-    text = '--train\n\r'+str(mark) + '\n\r' + content + '\n\r\n\r'
+    text = '--train\n\r' + str(mark) + '\n\r' + content + '\n\r\n\r'
     HOST = ('127.0.0.1', 10000)
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect(HOST)
@@ -65,7 +66,7 @@ async def add_to_csv(callback: types.CallbackQuery):
     text = message.text if message.text else message.caption
 
     if message.text:
-        start = text.find('\n')+1
+        start = text.find('\n') + 1
         if text.lower().startswith('НОВОЕ В DZEN'.lower()):
             finish = text.find('https://dzen.ru/')
         else:
@@ -118,11 +119,10 @@ async def add_to_csv(callback: types.CallbackQuery):
 
 async def start() -> None:
     dp.include_router(r)
+    print('Starting')
     await dp.start_polling(bot)
 
 
 if __name__ == '__main__':
+
     asyncio.run(start())
-    asyncio.run(
-        bot.send_message(chat_id=chat_id, text='Я запустил фильтрацию')
-    )
