@@ -33,6 +33,8 @@ async def resend_message(message: types.Message):
     if int(message.chat.id) == accepted_chai_id:
         return
 
+    print(message)
+
     builder = InlineKeyboardBuilder()
     builder.row(
         types.InlineKeyboardButton(text='Подходит', callback_data='yes'),
@@ -120,10 +122,7 @@ async def start() -> None:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        try:
-            split_mark = float(sys.argv[1])/100.0
-            print(split_mark)
-        except:
-            pass
     asyncio.run(start())
+    asyncio.run(
+        bot.send_message(chat_id=chat_id, text='Я запустил фильтрацию')
+    )
